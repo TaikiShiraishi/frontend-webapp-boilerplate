@@ -5,7 +5,8 @@ html
     title #{site.title}
   body
     p #{path.js}
-    h1 Hello world?
+    h1 Hello world
+    p env? #{process.env.NODE_ENV}
     if process.env.NODE_ENV === 'development'
       h1 I am in development mode
     else
