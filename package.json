@@ -10,12 +10,13 @@
   "config": {
     "build": "_build",
     "markup": "src/markup",
-    "develoment": "develoment"
+    "develoment": "develoment",
+    "pugData": "src/markup/_data"
   },
   "scripts": {
     "dev": "npm-run-all dev:*",
     "mkdir": "node ./helpers/mkdir.js",
-    "dev:pug": "cross-env NODE_ENV=$npm_package_config_develoment pug --out $npm_package_config_build --basedir src/markup -w src/markup --pretty",
+    "dev:pug": "cross-env NODE_ENV=$npm_package_config_develoment pug --out $npm_package_config_build --basedir src/markup -w src/markup --pretty --obj $npm_package_config_pugData/data.json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
