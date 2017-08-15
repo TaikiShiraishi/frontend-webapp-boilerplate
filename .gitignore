@@ -1,0 +1,20 @@
+### Node
+npm-debug.log*
+node_modules
+
+### Bundler config
+/.bundle
+
+### Bundler gems
+/vendor/bundle
+
+### Sass
+.sass-cache
+*.css.map
+
+### Project Specific
+/_build
+
+# 以下は自動生成されるのでコミットしないように
+/src/assets/scripts/_sharedConfig.js
+/src/assets/styles/_shared-config.scss

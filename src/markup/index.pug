@@ -1,0 +1,12 @@
+doctype html
+html
+  head
+    meta(charset="ja")
+    title 各種
+  body
+    h1 Hello world?
+    if process.env.NODE_ENV === 'development'
+      h1 I am in development mode
+    else
+      h1 I am not in development mode
+
