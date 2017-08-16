@@ -2,9 +2,11 @@ doctype html
 html
   head
     meta(charset="ja")
-    title 各種
+    title #{site.title}
   body
-    h1 Hello world?
+    p #{path.js}
+    h1 Hello world
+    p env? #{process.env.NODE_ENV}
     if process.env.NODE_ENV === 'development'
       h1 I am in development mode
     else

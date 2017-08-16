@@ -10,12 +10,14 @@
   "config": {
     "build": "_build",
     "markup": "src/markup",
-    "develoment": "develoment"
+    "development": "development",
+    "production": "production",
+    "pugData": "src/markup/_data"
   },
   "scripts": {
-    "dev": "npm-run-all dev:*",
+    "dev": "cross-env NODE_ENV=$npm_package_config_development npm-run-all dev:*",
     "mkdir": "node ./helpers/mkdir.js",
-    "dev:pug": "cross-env NODE_ENV=$npm_package_config_develoment pug --out $npm_package_config_build --basedir src/markup -w src/markup --pretty",
+    "dev:pug": "pug --out $npm_package_config_build --basedir src/markup -w src/markup --pretty --obj $npm_package_config_pugData/data.json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -32,6 +34,7 @@
     "cross-env": "^5.0.5",
     "fs-extra": "^4.0.1",
     "npm-run-all": "^4.0.2",
+    "path": "^0.12.7",
     "pug-cli": "^1.0.0-alpha6",
     "rimraf": "^2.6.1",
     "touch": "^3.1.0"
