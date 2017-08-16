@@ -17,15 +17,17 @@
     "pugData": "src/markup/_data"
   },
   "scripts": {
-    "dev": "cross-env NODE_ENV=$npm_package_config_development npm-run-all dev:*",
+    "dev": "cross-env NODE_ENV=$npm_package_config_development npm-run-all --parallel dev:*",
     "production": "cross-env NODE_ENV=$npm_package_config_production npm-run-all production:*",
     "mkdir": "node ./helpers/mkdir.js",
     "dev:pug": "pug $npm_package_config_markup/*.pug --out $npm_package_config_build --pretty --obj $npm_package_config_pugData/data.json",
     "dev:sass": "node-sass $npm_package_config_styles/*.scss --output $npm_package_config_build/assets/styles/ --source-map-contents true --output-style expanded --source-comments true",
+    "dev:script": "webpack --config webpack.config.js -d --progress --watch --display-error-details",
     "dev:watch-pug": "nodemon -e pug -x \"npm run dev:pug\"",
     "dev:watch-sass": "nodemon -e scss -x \"npm run dev:sass\"",
     "production:pug": "pug --out $npm_package_config_production --basedir $npm_package_config_markup $npm_package_config_markup --pretty --obj $npm_package_config_pugData/data.json",
     "production:sass": "node-sass $npm_package_config_styles/*.scss --output $npm_package_config_production/assets/styles/ --source-map-contents false --output-style compressed --source-comments false",
+    "production:script": "webpack --config webpack.config.js -d --progress --display-error-details",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -49,8 +51,10 @@
     "cross-env": "^5.0.5",
     "eslint": "^4.4.1",
     "eslint-config-airbnb": "^15.1.0",
+    "eslint-loader": "^1.9.0",
     "eslint-plugin-import": "^2.7.0",
     "fs-extra": "^4.0.1",
+    "json-loader": "^0.5.7",
     "lodash": "^4.17.4",
     "node-sass": "^4.5.3",
     "nodemon": "^1.11.0",
