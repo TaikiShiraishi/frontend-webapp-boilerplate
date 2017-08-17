@@ -35,14 +35,14 @@ module.exports = {
       compress: isProduction,
       sourceMap: !isProduction,
       uglifyOptions: {
-        ie8: false,
-        ecma: 7,
         output: {
-          comments: isProduction ? uglifySaveLicense : true,
+          comments: isProduction ? uglifySaveLicense : false,
         },
         compress: {
           drop_console: isProduction,
           drop_debugger: isProduction,
+          dead_code: isProduction,
+          warnings: false,
         },
       },
     }),
