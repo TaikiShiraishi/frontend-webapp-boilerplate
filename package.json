@@ -17,7 +17,8 @@
     "pugData": "src/markup/_data"
   },
   "scripts": {
-    "start": "dev",
+    "start": "npm-run-all clean dev",
+    "release": "npm-run-all clean production",
     "mkdir": "node ./helpers/mkdir.js",
     "postcss": "postcss $npm_package_config_build/assets/styles/**/*.css --config postcss.config.js --dir $npm_package_config_build/assets/styles/",
     "nodesass:dev": "node-sass $npm_package_config_styles/*.scss --output $npm_package_config_build/assets/styles/ --source-map-contents true --output-style expanded --source-comments true",
@@ -33,6 +34,7 @@
     "production:style": "npm-run-all nodesass:production postcss",
     "production:script": "webpack --config webpack.config.js -p --progress",
     "server": "browser-sync start --server $npm_package_config_build --files $npm_package_config_build --port 8000",
+    "clean": "rimraf $npm_package_config_build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
