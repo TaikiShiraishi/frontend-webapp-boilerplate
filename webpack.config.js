@@ -1,11 +1,11 @@
-const { join } = require('path');
-const { resolve } = require('path');
+const { join, resolve } = require('path');
 
 const srcPath = join(__dirname, 'src');
 const distPath = join(__dirname, '_build');
 const productionPath = join(__dirname, 'production');
 const webpack = require('webpack');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const uglifySaveLicense = require('uglify-save-license');
 
 const isProduction = (process.env.NODE_ENV === 'production');
 const outputPath = isProduction ? resolve(__dirname, `${productionPath}/assets/scripts`) : resolve(__dirname, `${distPath}/assets/scripts`);
@@ -31,8 +31,19 @@ module.exports = {
     new UglifyJSPlugin({
       compress: isProduction,
       mangle: false,
-      beautify: !isProduction,
       sourceMap: !isProduction,
+      uglifyOptions: {
+        ie8: false,
+        ecma: 7,
+        output: {
+          beautify: !isProduction,
+          comments: isProduction ? uglifySaveLicense : true,
+        },
+        compress: {
+          drop_console: isProduction,
+          drop_debugger: isProduction,
+        },
+      },
     }),
     new webpack.DefinePlugin({
       'process.env': { NODE_ENV: JSON.stringify(process.env.NODE_ENV) },
@@ -50,7 +61,12 @@ module.exports = {
         test: /\.js?$/,
         exclude: /node_modules/,
         use: [
-          'babel-loader',
+          {
+            loader: 'babel-loader',
+            options: {
+              compact: isProduction ? true : 'auto',
+            },
+          },
         ],
       },
       {
