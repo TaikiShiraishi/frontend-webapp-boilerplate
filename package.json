@@ -27,7 +27,7 @@
     "dev:watch-sass": "nodemon -e scss -x \"npm run dev:sass\"",
     "production:pug": "pug --out $npm_package_config_production --basedir $npm_package_config_markup $npm_package_config_markup --pretty --obj $npm_package_config_pugData/data.json",
     "production:sass": "node-sass $npm_package_config_styles/*.scss --output $npm_package_config_production/assets/styles/ --source-map-contents false --output-style compressed --source-comments false",
-    "production:script": "webpack --config webpack.config.js -d --progress --display-error-details",
+    "production:script": "webpack --config webpack.config.js -p --progress",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
