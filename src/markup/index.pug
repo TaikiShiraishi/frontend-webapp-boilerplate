@@ -3,9 +3,10 @@ html
   head
     meta(charset="ja")
     title #{site.title}
+    link(rel="stylesheet", href='assets/styles/main.css')
   body
     p #{path.js}
-    h1 Hello world?
+    h1.title Hello worldだよ?
     p env? #{process.env.NODE_ENV}
     if process.env.NODE_ENV === 'development'
       h1 I am in development mode
