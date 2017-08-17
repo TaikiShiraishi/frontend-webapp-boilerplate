@@ -11,13 +11,14 @@
     "build": "_build",
     "markup": "src/markup",
     "styles": "src/assets/styles",
+    "media": "src/assets/media",
     "development": "development",
     "production": "production",
     "shared": "helpers/sharedConfig.js",
     "pugData": "src/markup/_data"
   },
   "scripts": {
-    "start": "npm-run-all clean dev",
+    "start": "npm-run-all clean copy dev",
     "release": "npm-run-all clean production",
     "mkdir": "node ./helpers/mkdir.js",
     "postcss": "postcss $npm_package_config_build/assets/styles/**/*.css --config postcss.config.js --dir $npm_package_config_build/assets/styles/",
@@ -35,6 +36,7 @@
     "production:script": "webpack --config webpack.config.js -p --progress",
     "server": "browser-sync start --server $npm_package_config_build --files $npm_package_config_build --port 8000",
     "clean": "rimraf $npm_package_config_build",
+    "copy": "cpx \"src/assets/**/*.{png,jpg,gif,svg,ico}\" $npm_package_config_build/assets",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
