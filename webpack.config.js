@@ -1,15 +1,14 @@
 const { join, resolve } = require('path');
 
 const srcPath = join(__dirname, 'src');
-const distPath = join(__dirname, '_build');
-const productionPath = join(__dirname, 'production');
+const buildPath = join(__dirname, '_build');
 const webpack = require('webpack');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const uglifySaveLicense = require('uglify-save-license');
 const WebpackStrip = require('strip-loader');
 
 const isProduction = (process.env.NODE_ENV === 'production');
-const outputPath = isProduction ? resolve(__dirname, `${productionPath}/assets/scripts`) : resolve(__dirname, `${distPath}/assets/scripts`);
+const outputPath = resolve(__dirname, `${buildPath}/assets/scripts`);
 
 module.exports = {
   entry: [
