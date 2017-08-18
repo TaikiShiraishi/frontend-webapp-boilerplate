@@ -37,6 +37,7 @@
     "server": "browser-sync start --server $npm_package_config_build --files $npm_package_config_build --port 8000",
     "clean": "rimraf $npm_package_config_build",
     "copy": "cpx \"src/assets/**/*.{png,jpg,gif,svg,ico}\" $npm_package_config_build/assets",
+    "svgsprite": "svg-sprite --config svgsprite.config.json --shape-transform-svgo svgo.config.json $npm_package_config_media/images/_symbol/*svg",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
