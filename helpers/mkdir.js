@@ -14,10 +14,11 @@ const dirs = [
   `${styles}/2-project`,
   `${styles}/3-cosmetic`,
   `${styles}/include`,
+  `${images}/_symbol`,
   `${images}/vector`,
   `${images}/raster`,
   `${scripts}`,
-  `${favicons}`
+  `${favicons}`,
 ];
 
 console.log('mkdir start')
@@ -31,4 +32,3 @@ dirs.forEach((dir) => {
   }
 });
 console.log('mkdir finished!!')
-// mkdirp src/markup/_base src/markup/_data src/assets/styles/0-foundation src/assets/styles/1-base src/assets/styles/2-project src/assets/styles/3-cosmetic src/assets/styles/include src/assets/scripts src/assets/media/images/vector src/assets/media/images/raster src

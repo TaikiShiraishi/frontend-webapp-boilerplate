@@ -1,0 +1,9 @@
+{
+  "dest": "_build/assets/media/images/vector",
+  "mode": {
+    "symbol": {
+      "dest": ".",
+      "sprite": "sprite.svg"
+    }
+  }
+}
