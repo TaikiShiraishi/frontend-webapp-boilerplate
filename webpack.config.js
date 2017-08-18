@@ -23,7 +23,7 @@ module.exports = {
     extensions: ['.js', '.json'],
     alias: {
       '~': join(srcPath),
-      assets: join(srcPath, 'assets'), // use in template with <img src="~assets/nuxt.png" />
+      assets: join(srcPath, 'assets'),
       '~assets': join(srcPath, 'assets'),
     },
   },
@@ -60,15 +60,7 @@ module.exports = {
       {
         test: /\.js?$/,
         exclude: /node_modules/,
-        use: [
-          {
-            loader: 'babel-loader',
-            options: {
-              compact: isProduction ? true : 'auto',
-              comments: !isProduction,
-            },
-          },
-        ],
+        use: ['babel-loader'],
       },
       isProduction ? {
         test: /\.js?$/,
