@@ -2,8 +2,8 @@
 
 ## Enviroment
 
-- Node.js(v8.2.0)
-- npm(v5.3.0)
+- Node.js(v10.4.0)
+- npm(v6.1.0)
 
 ## Installation
 
@@ -14,11 +14,11 @@ $ npm install
 ## develop
 
 ```
-$ npm start
+$ npm run start
 ```
 
 ## release
 
 ```
-$ npm release
+$ npm run release
 ```
