@@ -12,6 +12,14 @@
     "generator-star-spacing": 0,
     "no-duplicate-imports": 0,
     "import/no-duplicates": 2,
-    "no-console": "warn"
+    "no-console": "warn",
+    "prettier/prettier": [
+      "error",
+      {
+        "singleQuote": true,
+        "semi": true,
+        "tabWidth": 2
+      }
+    ]
   }
 }
