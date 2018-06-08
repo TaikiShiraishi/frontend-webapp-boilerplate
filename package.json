@@ -38,7 +38,7 @@
     "watch-sass": "nodemon -e scss -x \"npm run stylecompile\"",
     "watch-svg": "nodemon --ignore $npm_package_config_build -e svg -x \"npm run svgsprite\"",
     "dev:watch-images": "nodemon --ignore $npm_package_config_build --ignore $npm_package_config_meida/_symbol -e png,jpg,gif,svg,ico -x \"npm run copy\"",
-    "server": "browser-sync start --server $npm_package_config_build --files $npm_package_config_build --port 8000 --open external --reload-delay 200 --no-ghost-mode false",
+    "server": "browser-sync start --server $npm_package_config_build --files $npm_package_config_build --port 8000 --no-open external --reload-delay 200 --no-ghost-mode false",
     "clean": "rimraf $npm_package_config_build",
     "copy": "cpx \"src/assets/**/*.{png,jpg,gif,svg,ico}\" $npm_package_config_build/assets",
     "svgsprite": "svg-sprite --config svgsprite.config.json --shape-transform-svgo svgo.config.json $npm_package_config_media/_symbol/*svg",
