@@ -1,22 +1,22 @@
 const { join, resolve } = require('path');
 
 const srcPath = join(__dirname, 'src');
-const buildPath = join(__dirname, '_build');
+const buildPath = join(__dirname, '_dist');
 const webpack = require('webpack');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const uglifySaveLicense = require('uglify-save-license');
 const WebpackStrip = require('strip-loader');
 
 const isProduction = (process.env.NODE_ENV === 'production');
-const outputPath = resolve(__dirname, `${buildPath}/assets/scripts`);
+const outputPath = resolve(__dirname, `${buildPath}/assets/javascripts`);
 
 module.exports = {
   entry: [
-    join(__dirname, 'src/assets/scripts/main.js'),
+    join(srcPath, '/assets/javascripts/main.js'),
   ],
   output: {
     path: outputPath,
-    filename: '[name].js',
+    filename: '[name].bundle.js',
   },
   devtool: isProduction ? false : 'inline-source-map',
   resolve: {
@@ -29,11 +29,10 @@ module.exports = {
   },
   plugins: [
     new UglifyJSPlugin({
-      beautify: !isProduction,
-      mangle: false,
-      compress: isProduction,
       sourceMap: !isProduction,
       uglifyOptions: {
+        mangle: false,
+        compress: isProduction,
         output: {
           comments: isProduction ? uglifySaveLicense : false,
         },
@@ -79,4 +78,10 @@ module.exports = {
       },
     ],
   },
+  devServer: {
+    contentBase: join(__dirname, '_dist'),
+    publicPath: '/assets/',
+    port: 8080,
+    watchContentBase: true
+  }
 };

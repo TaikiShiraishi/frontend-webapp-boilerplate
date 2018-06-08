@@ -1,5 +1,5 @@
 {
-  "dest": "_build/assets/media/images/vector",
+  "dest": "_dist/assets/media/images/vector",
   "mode": {
     "symbol": {
       "dest": ".",
