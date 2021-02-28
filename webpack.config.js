@@ -2,6 +2,7 @@ const { join, resolve } = require('path')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const CopyPlugin = require('copy-webpack-plugin')
 const globule = require('globule')
 const ejsConfig = require('./src/markup/page.config.js')
 
@@ -9,13 +10,13 @@ const ejsConfig = require('./src/markup/page.config.js')
  * paths
  */
 const srcPath = resolve(__dirname, 'src')
-const tempPath = resolve(__dirname, '.tmp')
+const publicPath = resolve(__dirname, 'public')
 const buildPath = resolve(__dirname, 'dist')
 
 const isProduction = process.env.NODE_ENV === 'production'
 
 // 開発用サーバーのドキュメントルートとなる一時フォルダ
-const targetDir = isProduction ? buildPath : tempPath
+const targetDir = isProduction ? buildPath : publicPath
 
 // ejs のコンパイル設定
 function getHtmlEntries() {
@@ -28,6 +29,7 @@ function getHtmlEntries() {
       minify: false,
       alwaysWriteToDisk: true,
       hash: true,
+      publicPath: '/',
       data: ejsConfig.data, // ← データ
     })
   })
@@ -50,7 +52,20 @@ module.exports = {
     },
   },
   plugins: [
-    new CleanWebpackPlugin(),
+    isProduction ? new CleanWebpackPlugin() : () => {},
+    isProduction
+      ? new CopyPlugin({
+          patterns: [
+            {
+              from: publicPath,
+              to: buildPath,
+              globOptions: {
+                ignore: ['**/.DS_Store', '**/Thumbs.db', '**/.keep'],
+              },
+            },
+          ],
+        })
+      : () => {},
     ...getHtmlEntries(),
     new MiniCssExtractPlugin({ filename: 'assets/stylesheets/[name].css' }),
   ],
@@ -105,5 +120,6 @@ module.exports = {
     port: 8080,
     watchContentBase: true,
     hot: true,
+    publicPath: '/',
   },
 }
