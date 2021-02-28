@@ -1,6 +1,7 @@
 const { join, resolve } = require('path')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const globule = require('globule')
 const ejsConfig = require('./src/markup/page.config.js')
 
@@ -26,6 +27,7 @@ function getHtmlEntries() {
       template: join(srcPath, subPath),
       minify: false,
       alwaysWriteToDisk: true,
+      hash: true,
       data: ejsConfig.data, // ← データ
     })
   })
@@ -36,7 +38,7 @@ module.exports = {
   entry: [join(srcPath, '/assets/javascripts/main.js')],
   output: {
     path: targetDir,
-    filename: 'assets/javascripts/[name].[contenthash].bundle.js',
+    filename: 'assets/javascripts/[name].bundle.js',
   },
   devtool: isProduction ? false : 'inline-source-map',
   resolve: {
@@ -47,7 +49,11 @@ module.exports = {
       '@assets': join(srcPath, '/assets'),
     },
   },
-  plugins: [new CleanWebpackPlugin(), ...getHtmlEntries()],
+  plugins: [
+    new CleanWebpackPlugin(),
+    ...getHtmlEntries(),
+    new MiniCssExtractPlugin({ filename: 'assets/stylesheets/[name].css' }),
+  ],
   module: {
     rules: [
       {
@@ -66,6 +72,28 @@ module.exports = {
                 removeComments: true,
               },
             },
+          },
+        ],
+      },
+      {
+        test: /\.scss$/i,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {},
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: !isProduction,
+              importLoaders: 2,
+            },
+          },
+          {
+            loader: 'postcss-loader',
+          },
+          {
+            loader: 'sass-loader',
           },
         ],
       },
