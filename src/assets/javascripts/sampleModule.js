@@ -1,6 +1,6 @@
 function sampaleModule() {
-  console.log('hoge');
-  return 'hoge?';
+  // eslint-disable-next-line no-console
+  console.log('hoge')
 }
 
-export default sampaleModule;
+export default sampaleModule

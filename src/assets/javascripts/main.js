@@ -1,4 +1,4 @@
-import sampleModule from './sampleModule';
+import sampleModule from '@/sampleModule'
 
 // test
-sampleModule();
+sampleModule()

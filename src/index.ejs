@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= htmlWebpackPlugin.options.data.site.title %></title>
+  </head>
+  <body>
+    <% include markup/includes/_header %>
+    <p><%= htmlWebpackPlugin.options.data.path.js %></p>
+    <p><%= htmlWebpackPlugin.options.data.env %></p>
+  </body>
+</html>

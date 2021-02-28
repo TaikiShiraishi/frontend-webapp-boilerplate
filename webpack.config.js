@@ -1,87 +1,80 @@
-const { join, resolve } = require('path');
+const { join, resolve } = require('path')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const globule = require('globule')
+const ejsConfig = require('./src/markup/page.config.js')
 
-const srcPath = join(__dirname, 'src');
-const buildPath = join(__dirname, '_dist');
-const webpack = require('webpack');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
-const uglifySaveLicense = require('uglify-save-license');
-const WebpackStrip = require('strip-loader');
+/*
+ * paths
+ */
+const srcPath = resolve(__dirname, 'src')
+const tempPath = resolve(__dirname, '.tmp')
+const buildPath = resolve(__dirname, 'dist')
 
-const isProduction = (process.env.NODE_ENV === 'production');
-const outputPath = resolve(__dirname, `${buildPath}/assets/javascripts`);
+const isProduction = process.env.NODE_ENV === 'production'
+
+// 開発用サーバーのドキュメントルートとなる一時フォルダ
+const targetDir = isProduction ? buildPath : tempPath
+
+// ejs のコンパイル設定
+function getHtmlEntries() {
+  const pattern = ['**/*.ejs', '!**/_*.ejs']
+  const options = { cwd: srcPath }
+  return globule.find(pattern, options).map((subPath) => {
+    return new HtmlWebpackPlugin({
+      filename: `${subPath.replace(/\.ejs$/i, '.html')}`,
+      template: join(srcPath, subPath),
+      minify: false,
+      data: ejsConfig.data, // ← データ
+    })
+  })
+}
 
 module.exports = {
-  entry: [
-    join(srcPath, '/assets/javascripts/main.js'),
-  ],
+  mode: process.env.NODE_ENV,
+  entry: [join(srcPath, '/assets/javascripts/main.js')],
   output: {
-    path: outputPath,
-    filename: '[name].bundle.js',
+    path: targetDir,
+    filename: '[name].[contenthash].bundle.js',
   },
   devtool: isProduction ? false : 'inline-source-map',
   resolve: {
-    extensions: ['.js', '.json'],
+    modules: [join(srcPath, '/assets/javascripts'), 'node_modules'],
+    extensions: ['.js'],
     alias: {
-      '~': join(srcPath),
-      assets: join(srcPath, 'assets'),
-      '~assets': join(srcPath, 'assets'),
+      '@': join(srcPath, '/assets/javascripts'),
+      '@assets': join(srcPath, '/assets'),
     },
   },
-  plugins: [
-    new UglifyJSPlugin({
-      sourceMap: !isProduction,
-      uglifyOptions: {
-        mangle: false,
-        compress: isProduction,
-        output: {
-          comments: isProduction ? uglifySaveLicense : false,
-        },
-        compress: {
-          drop_console: isProduction,
-          drop_debugger: isProduction,
-          dead_code: isProduction,
-          warnings: false,
-        },
-      },
-    }),
-    new webpack.DefinePlugin({
-      'process.env': { NODE_ENV: JSON.stringify(process.env.NODE_ENV) },
-    }),
-    new webpack.NoEmitOnErrorsPlugin(),
-  ],
+  plugins: [new CleanWebpackPlugin(), ...getHtmlEntries()],
   module: {
     rules: [
-      {
-        test: /\.(js|jsx)$/,
-        use: ['eslint-loader'],
-        enforce: 'pre',
-      },
       {
         test: /\.js?$/,
         exclude: /node_modules/,
         use: ['babel-loader'],
       },
-      isProduction ? {
-        test: /\.js?$/,
-        exclude: /node_modules/,
+      {
+        test: /\.ejs$/,
         use: [
           {
-            loader: WebpackStrip.loader('debug', 'console.log', 'console.dir'),
+            loader: 'ejs-compiled-loader',
+            options: {
+              htmlmin: false,
+              htmlminOptions: {
+                removeComments: true,
+              },
+            },
           },
-        ],
-      } : {},
-      {
-        test: /\.json?$/,
-        use: [
-          'json-loader',
         ],
       },
     ],
   },
   devServer: {
-    contentBase: join(__dirname, '_dist'),
-    publicPath: '/assets/',
+    inline: true,
+    contentBase: targetDir,
     port: 8080,
-    watchContentBase: true
-  }
-};
+    watchContentBase: true,
+    hot: true,
+  },
+}

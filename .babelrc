@@ -1,15 +1,25 @@
 {
+  "targets": {
+    "browsers": ["> 0.1% in JP"]
+  },
   "presets": [
     [
-      "env",
+      "@babel/preset-env",
       {
-        "target": {
-          "browsers": ["> 5% in JP"]
-        },
-        "modules": false,
-        "useBuiltIns": true
+        "useBuiltIns": "usage",
+        "corejs": 3
       }
     ]
   ],
-  "plugins": ["transform-runtime"]
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "root": ["./src/assets/javascripts"],
+        "alias": {
+          "@": "./src/assets/javascripts"
+        }
+      }
+    ]
+  ]
 }
