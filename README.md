@@ -4,6 +4,7 @@
 - PostCSS
 - Sass
 - Babel
+- Jest
 
 # Usage
 
@@ -28,4 +29,10 @@ $ npm run start
 
 ```
 $ npm run build
+```
+
+## test
+
+```
+$ npm run test
 ```
