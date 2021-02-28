@@ -1,11 +1,25 @@
-### Node
-npm-debug.log*
+# Local files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Node
 node_modules
 
-### Sass
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Sass
 .sass-cache
 *.css.map
 
-### Project Specific
-/_dist
+# Editor directories and files
+.idea
+.vscode
+
+# Project Specific
+_dist
+.tmp
 
