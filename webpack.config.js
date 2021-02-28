@@ -22,7 +22,7 @@ function getHtmlEntries() {
   const options = { cwd: srcPath }
   return globule.find(pattern, options).map((subPath) => {
     return new HtmlWebpackPlugin({
-      filename: `${subPath.replace(/\.ejs$/i, '.html')}`,
+      filename: join(targetDir, `${subPath.replace(/\.ejs$/i, '.html')}`),
       template: join(srcPath, subPath),
       minify: false,
       alwaysWriteToDisk: true,
@@ -36,7 +36,7 @@ module.exports = {
   entry: [join(srcPath, '/assets/javascripts/main.js')],
   output: {
     path: targetDir,
-    filename: '[name].[contenthash].bundle.js',
+    filename: 'assets/javascripts/[name].[contenthash].bundle.js',
   },
   devtool: isProduction ? false : 'inline-source-map',
   resolve: {
