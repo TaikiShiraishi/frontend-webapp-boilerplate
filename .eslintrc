@@ -1,25 +1,17 @@
 {
-  "env": {
-    "browser": true
+  "parserOptions": {
+    "sourceType": "module"
   },
-  "parser": "babel-eslint",
-  "extends": ["airbnb-base", "prettier"],
-  "plugins": [
-    "import",
-    "prettier"
-  ],
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "extends": ["eslint:recommended", "prettier"],
+  "parser": "@babel/eslint-parser",
+  "plugins": ["babel", "prettier"],
   "rules": {
-    "generator-star-spacing": 0,
-    "no-duplicate-imports": 0,
-    "import/no-duplicates": 2,
-    "no-console": "warn",
-    "prettier/prettier": [
-      "error",
-      {
-        "singleQuote": true,
-        "semi": true,
-        "tabWidth": 2
-      }
-    ]
+    "prettier/prettier": "error",
+    "no-console": "warn"
   }
 }
