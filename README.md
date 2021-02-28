@@ -1,9 +1,16 @@
+# Tech stack
+
+- ejs
+- PostCSS
+- Sass
+- Babel
+
 # Usage
 
-## Enviroment
+## Environment
 
-- Node.js(v10.4.0)
-- npm(v6.1.0)
+- Node.js(v14.15.4)
+- npm(v6.14.10)
 
 ## Installation
 
@@ -17,8 +24,8 @@ $ npm install
 $ npm run start
 ```
 
-## release
+## build
 
 ```
-$ npm run release
+$ npm run build
 ```
