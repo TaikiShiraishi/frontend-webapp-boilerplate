@@ -17,7 +17,8 @@
       {
         "root": ["./src/assets/javascripts"],
         "alias": {
-          "@": "./src/assets/javascripts"
+          "@": "./src/assets/javascripts",
+          "@assets": "./src/assets"
         }
       }
     ]
