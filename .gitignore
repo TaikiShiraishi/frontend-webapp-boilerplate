@@ -20,6 +20,6 @@ yarn-error.log*
 .vscode
 
 # Project Specific
-_dist
+dist
 .tmp
 
