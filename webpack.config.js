@@ -25,6 +25,7 @@ function getHtmlEntries() {
       filename: `${subPath.replace(/\.ejs$/i, '.html')}`,
       template: join(srcPath, subPath),
       minify: false,
+      alwaysWriteToDisk: true,
       data: ejsConfig.data, // ← データ
     })
   })
