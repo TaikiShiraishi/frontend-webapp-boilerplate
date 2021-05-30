@@ -1,4 +1,4 @@
-import { createHeader } from './Header';
+import { createHeader } from './Header'
 
 export default {
   title: 'Example/Header',
@@ -7,14 +7,14 @@ export default {
     onLogout: { action: 'onLogout' },
     onCreateAccount: { action: 'onCreateAccount' },
   },
-};
+}
 
-const Template = (args) => createHeader(args);
+const Template = (args) => createHeader(args)
 
-export const LoggedIn = Template.bind({});
+export const LoggedIn = Template.bind({})
 LoggedIn.args = {
   user: {},
-};
+}
 
-export const LoggedOut = Template.bind({});
-LoggedOut.args = {};
+export const LoggedOut = Template.bind({})
+LoggedOut.args = {}

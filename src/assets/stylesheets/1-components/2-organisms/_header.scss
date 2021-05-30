@@ -1,0 +1,34 @@
+@charset "UTF-8";
+
+.Header {
+  @at-root {
+    & {
+    }
+
+    .Header__inner {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .Header__logo {
+      display: inline-block;
+      vertical-align: top;
+    }
+
+    .Header__title {
+      font-weight: 900;
+      font-size: 20px;
+      line-height: 1;
+      margin: 6px 0 6px 10px;
+      display: inline-block;
+      vertical-align: top;
+    }
+
+    .Button + .Button {
+      margin-left: 10px;
+    }
+  }
+}

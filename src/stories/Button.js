@@ -1,5 +1,3 @@
-import '@assets/stylesheets/main.scss'
-
 export const createButton = ({ primary = false, size = 'medium', backgroundColor, label, onClick }) => {
   const btn = document.createElement('button')
   btn.type = 'button'
