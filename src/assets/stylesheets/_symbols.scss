@@ -1,0 +1,85 @@
+@charset "UTF-8";
+
+// ------------------------------------------------------
+// Fonts
+//
+
+@mixin font-ja {
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+// ------------------------------------------------------
+// Font Sizes
+//
+$font-size-32: 32px;
+$font-size-20: 20px;
+$font-size-16: 16px;
+$font-size-14: 14px;
+$font-size-13: 13px;
+$font-size-12: 12px;
+$font-size-10: 10px;
+
+// ------------------------------------------------------
+// Line Heights
+//
+$line-height-16: (22px / 16px);
+$line-height-14: (20px / 14px);
+$line-height-12: (16px / 12px);
+
+// ------------------------------------------------------
+// Colors
+//
+
+$color-black: #141414;
+$color-white: #ffffff;
+
+$color-primary: #1ea7fd;
+// ------------------------------------------------------
+// z-index
+//
+
+$z-index-indicator: 10;
+$z-index-dialog: 9;
+$z-index-sub-slide-panel: 8;
+$z-index-slide-panel: 7;
+
+// ------------------------------------------------------
+// Media Queries
+//
+
+$media-phone-max: 767px;
+$mq-phone: '(max-width: #{$media-phone-max})';
+$mq-desktop: '(min-width: #{$media-phone-max + 1px})';
+
+// ------------------------------------------------------
+// Utilities
+//
+
+@mixin sr-only {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  padding: 0;
+  width: 1px;
+  height: 1px;
+  border: 0;
+  white-space: nowrap;
+}
+
+@mixin clearfix() {
+  &:before,
+  &:after {
+    display: table;
+    content: ' ';
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+@function rem($size) {
+  @if (unit($size) != px) {
+    @error "$size must be pixels.";
+  }
+  @return ($size / 16px) * 1rem;
+}

@@ -1,12 +1,5 @@
 @charset "UTF-8";
 
+@import 'symbols';
 @import '0-foundation/export';
-
-.foo {
-  appearance: none;
-  position: relative;
-}
-
-.title {
-  color: #f00;
-}
+@import '1-components/export';
