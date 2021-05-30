@@ -11,7 +11,9 @@
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack serve --config webpack.config.js",
     "build": "cross-env NODE_ENV=production webpack --config webpack.config.js",
-    "test": "jest"
+    "test": "jest",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "repository": {
     "type": "git",
@@ -28,7 +30,11 @@
     "@babel/plugin-proposal-class-properties": "^7.13.0",
     "@babel/preset-env": "^7.13.0",
     "@babel/runtime": "^7.13.2",
-    "autoprefixer": "^10.2.4",
+    "@storybook/addon-actions": "^6.2.9",
+    "@storybook/addon-essentials": "^6.2.9",
+    "@storybook/addon-links": "^6.2.9",
+    "@storybook/html": "^6.2.9",
+    "autoprefixer": "^9.8.6",
     "babel-jest": "^26.6.3",
     "babel-loader": "^8.2.2",
     "babel-plugin-module-resolver": "^4.1.0",
@@ -49,8 +55,8 @@
     "jest": "^26.6.3",
     "lint-staged": "^10.5.4",
     "mini-css-extract-plugin": "^1.3.9",
-    "postcss": "^8.2.6",
-    "postcss-loader": "^5.0.0",
+    "postcss": "^8.1.7",
+    "postcss-loader": "^4.0.4",
     "prettier": "^2.2.1",
     "sass": "^1.32.8",
     "sass-loader": "^11.0.1",
